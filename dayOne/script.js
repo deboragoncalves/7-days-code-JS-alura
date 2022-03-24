@@ -5,21 +5,25 @@ let stringThirty = '30';
 let numberTen = 10;
 let stringTen = '10';
 
-const resultEqual = (number, string) => {
-    alert(`As variáveis ${number} e ${string} tem o mesmo valor, mas tipos diferentes`);
+const resultEqualValue = (firstValue, secondValue) => {
+    alert(`As variáveis ${firstValue} e ${secondValue} tem o mesmo valor, mas tipos diferentes`);
 }
 
-const resultDifferent = (number, string) => {
-    alert(`As variáveis ${number} e ${string} não tem o mesmo valor`);
+const resultDifferentValue = (firstValue, secondValue) => {
+    alert(`As variáveis ${firstValue} e ${secondValue} não tem o mesmo valor`);
 }
 
-const compareTypes = (number, string) => {
-    if (number && string) {
-        number === string ? resultEqual(number, string) : resultDifferent(number, string);
+const compareTypeValue = (firstValue, secondValue) => {
+    if (firstValue && secondValue) {
+        let differentType = firstValue !== secondValue && firstValue == secondValue;
+        let differentValue = firstValue != secondValue;
+
+        differentType ? resultEqualValue(firstValue, secondValue) :
+        differentValue ? resultDifferentValue(firstValue, secondValue) : null; 
     } else {
         alert($`As variáveis informadas são inválidas.`);
     }
 }
 
-compareTypes(numberOne, stringOne);
-compareTypes(numberTen, stringTen);
+compareTypeValue(numberOne, stringOne);
+compareTypeValue(numberThirty, 40);
