@@ -15,7 +15,7 @@ const resultDifferent = (number, string) => {
 
 const compareTypes = (number, string) => {
     if (number && string) {
-        number == string ? resultEqual(number, string) : resultDifferent(number, string);
+        number === string ? resultEqual(number, string) : resultDifferent(number, string);
     } else {
         alert($`As variáveis informadas são inválidas.`);
     }
