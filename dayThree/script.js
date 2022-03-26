@@ -111,3 +111,5 @@ const showFinalMessage = (userSpeciality, frontendLanguage, backendLanguage, nex
     elementFinalMessage.style.display = "block";
     elementFinalMessage.innerHTML = finalMessage;
 }
+
+// TODO: refatorar usando inputs
