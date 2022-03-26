@@ -1,38 +1,40 @@
+var username, age, language;
+
 window.onload = () => {
     document.querySelector("#message-error").style.display = "none";
     document.querySelector("#message-success").style.display = "none";
 }
 
-const sendData = () => {
-    validateForm();
+const changeNameValue = () => {
+    username = document.querySelector("#name").value;
+}
+
+const changeAgeValue = () => {
+    age = document.querySelector("#age").value;
+}
+
+const changeLanguageValue = () => {
+    language = document.querySelector("#language").value;
 }
 
 const validateForm = () => {
-    let name = document.querySelector("#name").value;
-    let age = document.querySelector("#age").value;
-    let language = document.querySelector("#language").value;
-
     !language ? showErrorMessage("Linguagem de programação") :
         !age ? showErrorMessage("Idade") :
-            !name ? showErrorMessage("Nome") : showSuccessMessage(language, age, name);
-
+            !username ? showErrorMessage("Nome") : showSuccessMessage(language, username, age);
 }
 
-// Onchange input
-
 const showErrorMessage = (field) => {
-    console.log("entrou erro " + field)
     let errorMessage = `O campo ${field} está inválido`;
 
     document.querySelector("#message-error").innerHTML = errorMessage;
     document.querySelector("#message-error").style.display = "block";
 }
 
-const showSuccessMessage = (language, age, name) => {
-    console.log(language)
-    let successMessage = `${name}, você tem ${age} anos de idade e está aprendendo a 
+const showSuccessMessage = (language, username, age) => {
+    let successMessage = `${username}, você tem ${age} anos de idade e está aprendendo a 
     linguagem ${language}`;
 
     document.querySelector("#message-success").innerHTML = successMessage;
     document.querySelector("#message-success").style.display = "block";
+    document.querySelector("#message-error").style.display = "none";
 }
