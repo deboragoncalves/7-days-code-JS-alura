@@ -1,44 +1,42 @@
 var containerBuy = document.querySelector("#container-buy");
 var elementBuyList = document.querySelector("#buy-list");
 
-var food, listFood = new Array();
+var product,
+  listProducts = new Array();
 
 window.onload = () => {
+  containerBuy.style.display = "none";
+  elementBuyList.style.display = "none";
+};
+
+const changeProduct = () => {
+  product = document.querySelector("#product").value;
+};
+
+const sendProduct = () => {
+  let checkedWantBuy = document.querySelector('input[name="wantBuy"]:checked');
+
+  if (!checkedWantBuy) {
     containerBuy.style.display = "none";
-    elementBuyList.style.display = "none";
-}
+    return;
+  } else if (checkedWantBuy.value == "Não") {
+    containerBuy.style.display = "none";
+    return;
+  }
 
-const changeFood = () => {
-    food = document.querySelector("#food").value;
-}
+  containerBuy.style.display = "block";
 
-const sendFood = () => {
-    let checkedWantBuy = document.querySelector('input[name="wantBuy"]:checked');
+  let checkedCategory = document.querySelector(
+    'input[name="categories"]:checked'
+  );
 
-    if (checkedWantBuy) {
-        if (checkedWantBuy.value == "Não") {
-            containerBuy.style.display = "none";
-            return;
-        }
-    } else {
-        containerBuy.style.display = "none";
-        return;
-    }
+  if (checkedCategory.value && product && checkedWantBuy.value == "Sim") {
+    listProducts.push(
+      `Categoria: ${checkedCategory.value}, Produto: ${product}`
+    );
+  }
 
-    containerBuy.style.display = "block";
-
-    let checkedCategory = document.querySelector('input[name="categories"]:checked');
-
-    if (checkedCategory) {
-        if (food) {
-            elementBuyList.innerHTML = "Você deseja comprar os seguintes produtos: <br>";
-            listFood.push(food);
-            elementBuyList.innerHTML += `Categoria: ${checkedCategory.value}, Produto: ${food}`;
-        } 
-
-        elementBuyList.style.display = "block";
-    }
-
-}
-
-// TODO: vários produtos
+  elementBuyList.innerHTML = "Você deseja comprar os seguintes produtos: <br>";
+  elementBuyList.innerHTML += listProducts.join("<br>");
+  elementBuyList.style.display = "block";
+};

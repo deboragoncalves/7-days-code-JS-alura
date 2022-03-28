@@ -20,7 +20,7 @@
   <body>
     <form class="col-4">
       <div class="p-2">
-        <label>Você deseja comprar comida no mercado?</label><br>
+        <label>Você deseja comprar algum produto no mercado?</label><br>
         <input type="radio" id="wannaBuy" name="wantBuy" value="Sim" />
         <label for="wannaBuy">Sim</label>
         <input type="radio" id="dontWannaBuy" name="wantBuy" value="Não" />
@@ -28,18 +28,18 @@
       </div>
       <div id="container-buy">
         <div class="p-2">
-          <label>Cite uma comida que deseja comprar no mercado:</label>
+          <label>Cite um produto que deseja comprar no mercado:</label>
           <input
             class="form-control"
             type="text"
-            onchange="changeFood()"
-            name="food"
-            id="food"
-            placeholder="Comida"
+            onchange="changeProduct()"
+            name="product"
+            id="product"
+            placeholder="Produto"
           />
         </div>
         <div class="p-2">
-          <label>Em qual categoria essa comida se encaixa?</label><br>
+          <label>Em qual categoria esse produto se encaixa?</label><br>
           <input type="radio" id="fruits" name="categories" value="Frutas" />
           <label for="fruits">Frutas</label>
           <input type="radio" id="fries" name="categories" value="Congelados" />
@@ -54,7 +54,7 @@
         id="buttonSend"
         class="btn btn-outline-success m-2"
         type="button"
-        onclick="sendFood()"
+        onclick="sendProduct()"
       >
         Enviar
       </button>
