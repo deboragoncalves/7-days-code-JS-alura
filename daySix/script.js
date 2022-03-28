@@ -90,3 +90,5 @@ const exibirListaProdutos = () => {
   elementBuyList.innerHTML += listProducts.join("<br>");
   elementBuyList.style.display = "block";
 };
+
+// TODO: resolver bug remove
