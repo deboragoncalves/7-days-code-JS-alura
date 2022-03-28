@@ -70,25 +70,24 @@ const verificarRemoverProduto = () => {
     return;
   }
 
-  if (listProducts.includes(productRemove)) {
-    for (let index = 0; index < listProducts.length; index++) {
-      if (listProducts[index].includes(productRemove)) {
-        listProducts = listProducts.splice(index, 1);
-      }
+  for (let index = 0; index < listProducts.length; index++) {
+    if (listProducts[index].includes(productRemove)) {
+      // Splice - remove o elemento e retorna o próprio elemento removido
+      // Segundo parâmetro - número de itens a partir do elemento
+
+      let removeElements = listProducts.splice(index);
     }
-  } else {
-    let productNotFound = document.querySelector("#product-not-found");
-    productNotFound.innerHTML = `O produto a ser removido ${productRemove} não foi encontrado na lista de produtos.`;
   }
 
   exibirListaProdutos();
 };
 
 const exibirListaProdutos = () => {
+  if (!listProducts) {
+    return;
+  }
+
   // Exibir lista
-  elementBuyList.innerHTML = "Você deseja comprar os seguintes produtos: <br>";
-  elementBuyList.innerHTML += listProducts.join("<br>");
+  elementBuyList.innerHTML = listProducts.join("<br>");
   elementBuyList.style.display = "block";
 };
-
-// TODO: resolver bug remove
