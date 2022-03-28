@@ -1,11 +1,7 @@
 var containerBuy = document.querySelector("#container-buy");
 var elementBuyList = document.querySelector("#buy-list");
 
-var food;
-var listFruits = new Array();
-var listFries = new Array();
-var listCandies = new Array();
-var listOthers = new Array();
+var food, listFood = new Array();
 
 window.onload = () => {
     containerBuy.style.display = "none";
@@ -36,7 +32,7 @@ const sendFood = () => {
     if (checkedCategory) {
         if (food) {
             elementBuyList.innerHTML = "Você deseja comprar os seguintes produtos: <br>";
-            listFruits.push(food);
+            listFood.push(food);
             elementBuyList.innerHTML += `Categoria: ${checkedCategory.value}, Produto: ${food}`;
         } 
 
