@@ -3,6 +3,7 @@ var elementBuyList = document.querySelector("#buy-list");
 var containerRemoveProduct = document.querySelector(
   "#container-product-remove"
 );
+var containerQuestionRemove = document.querySelector("#container-question-remove");
 
 var product,
   productRemove,
@@ -12,6 +13,7 @@ window.onload = () => {
   containerBuy.style.display = "none";
   elementBuyList.style.display = "none";
   containerRemoveProduct.style.display = "none";
+  containerQuestionRemove.style.display = "none";
 };
 
 const changeProduct = () => {
@@ -34,6 +36,7 @@ const sendProduct = () => {
     return;
   }
 
+  containerQuestionRemove.style.display = "block";
   containerBuy.style.display = "block";
 
   let checkedCategory = document.querySelector(
