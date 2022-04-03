@@ -1,115 +1,143 @@
-var userSpeciality, nextSteps, frontendLanguage, backendLanguage;
-var languages = new Array();
+var finalMessage = document.querySelector("#final-message");
+var otherTechs;
 
 window.onload = () => {
-  document.querySelector("#final-message").style.display = "none";
-  startGame();
+  finalMessage.style.display = "none";
 };
 
-const startGame = () => {
-  userSpeciality = prompt(
-    "Em qual área você deseja de especializar: Front-end ou Back-end?"
-  );
-
-  if (!userSpeciality) {
-    alert("Resposta inválida");
-    return;
-  } else if (
-    !userSpeciality.toUpperCase().includes("FRONT") &&
-    !userSpeciality.toUpperCase().includes("BACK")
-  ) {
-    alert("Resposta inválida");
-    return;
-  }
-
-  secondQuestion(userSpeciality);
-};
-
-const secondQuestion = (userSpeciality) => {
-  if (userSpeciality.toUpperCase().includes("FRONT")) {
-    frontendLanguage = prompt(
-      "Qual linguagem você deseja aprender: React ou Vue?"
-    );
-
-    if (!frontendLanguage) {
-      alert("Resposta inválida");
-      return;
-    } else if (
-      !frontendLanguage.toUpperCase().includes("REACT") &&
-      !frontendLanguage.toUpperCase().includes("VUE")
-    ) {
-      alert("Resposta inválida");
-      return;
-    }
-  } else if (userSpeciality.toUpperCase().includes("BACK")) {
-    backendLanguage = prompt(
-      "Qual linguagem você deseja aprender: C# ou Java?"
-    );
-
-    if (!backendLanguage) {
-      alert("Resposta inválida");
-      return;
-    } else if (
-      !backendLanguage.toUpperCase().includes("C#") &&
-      !backendLanguage.toUpperCase().includes("JAVA")
-    ) {
-      alert("Resposta inválida");
-      return;
-    }
-  }
-
-  thirdQuestion();
-};
-
-const thirdQuestion = () => {
-  nextSteps = prompt(
-    "Você deseja continuar como: FRONTEND ou BACKEND, ou se tornar um FULLSTACK?"
-  );
-
-  if (!nextSteps) {
-    alert("Resposta inválida");
-    return;
-  } else if (
-    !nextSteps.toUpperCase().includes("FRONT") &&
-    !nextSteps.toUpperCase().includes("BACK") &&
-    !nextSteps.toUpperCase().includes("FULLSTACK")
-  ) {
-    alert("Resposta inválida");
-    return;
-  }
-
-  fourthQuestion();
-};
-
-const fourthQuestion = () => {
-  let language;
-
-  language = prompt("Qual linguagem você deseja aprender?");
-
-  while (language.length > 0) {
-      language = prompt("Qual linguagem você deseja aprender?");
-      languages.push(language);
-  }
-
-  showFinalMessage(userSpeciality, frontendLanguage, backendLanguage, nextSteps, languages);
-};
-
-const showFinalMessage = (userSpeciality, frontendLanguage, backendLanguage, nextSteps, languages) => {
-    let finalMessage = `Fim do jogo. Você deseja se especializar na área de ${userSpeciality}`;
-
-    if (userSpeciality.toUpperCase().includes("FRONT")) {
-        finalMessage += `, através da linguagem ${frontendLanguage}.`;
-    } else if (userSpeciality.toUpperCase().includes("BACK")) {
-        finalMessage += `, através da linguagem ${backendLanguage}.`;
-    }
-
-    if (nextSteps.toUpperCase().includes("FULLSTACK")) {
-        finalMessage += ` Posteriormente, deseja se tornar um desenvolvedor generalista, se tornando um ${nextSteps}.`;
-    }
-
-    let elementFinalMessage = document.querySelector("#final-message");
-    elementFinalMessage.style.display = "block";
-    elementFinalMessage.innerHTML = finalMessage;
+const changeOtherTechs = (textArea) => {
+  otherTechs = textArea.value;
 }
 
-// TODO: refatorar usando inputs
+const sendAnswers = () => {
+  if (!validateForm()) {
+    finalMessage.style.display = "block";
+    finalMessage.innerHTML = "Os campos estão inválidos. Tente novamente";
+    finalMessage.style.color = "red";
+    return;
+  }
+
+  finalMessage.style.display = "none";
+  showBackFrontArea();
+}
+
+const showBackFrontArea = () => {
+  finalMessage.style.display = "none";
+
+  let containerFrontend = document.querySelector(".frontend-area");
+  let containerBackend = document.querySelector(".backend-area");
+
+  containerFrontend.style.display = "none";
+  containerBackend.style.display = "none";
+  
+  let inputFirstArea = document.querySelector(
+    'input[name="firstArea"]:checked'
+  );
+
+  if (inputFirstArea) {
+    let firstArea = inputFirstArea.value.toUpperCase();
+
+    if (firstArea == "FRONTEND") {
+      containerFrontend.style.display = "block";
+      
+      if (!validateFrontArea()) {
+        finalMessage.style.display = "block";
+        finalMessage.innerHTML = "Os campos estão inválidos. Tente novamente";
+        finalMessage.style.color = "red";
+        return;
+      }
+
+      let inputAreaFrontend = document.querySelector(
+        'input[name="areaFrontend"]:checked'
+      );
+
+      showFinalMessage(inputAreaFrontend.value);
+    
+    } else if (firstArea == "BACKEND") {
+      containerBackend.style.display = "block";
+      validateBackendArea();
+
+      if (!validateBackendArea()) {
+        finalMessage.style.display = "block";
+        finalMessage.innerHTML = "Os campos estão inválidos. Tente novamente";
+        finalMessage.style.color = "red";
+        return;
+      }
+
+      let inputAreaBackend = document.querySelector(
+        'input[name="areaBackend"]:checked'
+      );
+
+      showFinalMessage(inputAreaBackend.value);
+    }
+
+  }
+}
+
+const validateFrontArea = () => {
+  let validForm = true;
+
+  let inputAreaFrontend = document.querySelector(
+    'input[name="areaFrontend"]:checked'
+  );
+
+  if (!inputAreaFrontend) {
+    validForm = false;
+  } else if (!inputAreaFrontend.value) {
+    validForm = false;
+  }
+
+  return validForm;
+}
+
+const validateBackendArea = () => {
+  let validForm = true;
+
+  let inputAreaBackend = document.querySelector(
+    'input[name="areaBackend"]:checked'
+  );
+
+  if (!inputAreaBackend) {
+    validForm = false;
+  } else if (!inputAreaBackend.value) {
+    validForm = false;
+  }
+
+  return validForm;
+}
+
+const validateForm = () => {
+  let validForm = true;
+  let inputFirstArea = document.querySelector(
+    'input[name="firstArea"]:checked'
+  );
+  let inputSecondArea = document.querySelector(
+    'input[name="secondArea"]:checked'
+  );
+
+  if (!inputFirstArea || !inputSecondArea || !otherTechs) {
+    validForm = false;
+  } else if (!inputFirstArea.value || !inputSecondArea.value) {
+    validForm = false;
+  }
+
+  return validForm;
+}
+
+const showFinalMessage = languageArea => {
+  finalMessage.style.display = "none";
+
+  let inputFirstArea = document.querySelector(
+    'input[name="firstArea"]:checked'
+  );
+  let inputSecondArea = document.querySelector(
+    'input[name="secondArea"]:checked'
+  );
+
+  finalMessage.innerHTML = "Próximos passos: ";
+  finalMessage.innerHTML += `Você escolheu estudar ${inputFirstArea.value}, se especializando na linguagem
+  ${languageArea}. Posteriormente, pretende ${inputSecondArea.value}, nas seguintes tecnologias: ${otherTechs}`;
+
+  finalMessage.style.display = "block";
+  finalMessage.style.color = "black";
+}

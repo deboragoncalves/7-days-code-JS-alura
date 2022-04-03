@@ -1,15 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Day 3 - Challenge</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-</head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+  </head>
+  <style type="text/css">
+    .frontend-area,
+    .backend-area {
+      display: none;
+    }
+  </style>
+  <body>
+    <form class="col-6">
+      <div class="p-2">
+        <label
+          >Em qual área você deseja de especializar: Front-end ou
+          Back-end?</label
+        ><br />
+        <input type="radio" id="frontEnd" name="firstArea" value="Frontend" />
+        <label>Front-end</label>
+        <input type="radio" id="backEnd" name="firstArea" value="Backend" />
+        <label>Back-end</label>
+      </div>
+      <div class="p-2 frontend-area">
+        <label
+          >Qual linguagem você iniciar seus aprendizados: React ou Vuejs?</label
+        ><br />
+        <input type="radio" id="react" name="areaFrontend" value="React" />
+        <label>React</label>
+        <input type="radio" id="vuejs" name="areaFrontend" value="Vuejs" />
+        <label>Vuejs</label>
+      </div>
+      <div class="p-2 backend-area">
+        <label>Qual linguagem você iniciar seus aprendizados: Java ou C#?</label
+        ><br />
+        <input type="radio" id="java" name="areaBackend" value="Java" />
+        <label>Java</label>
+        <input type="radio" id="C#" name="areaBackend" value="C#" />
+        <label>C#</label>
+      </div>
+      <div class="p-2">
+        <label
+          >Você pretende continuar na mesma área ou se tornar Fullstack?</label
+        ><br />
+        <input type="radio" id="sameArea" name="secondArea" value="continuar nessa área" />
+        <label>Keep going!</label>
+        <input
+          type="radio"
+          id="fullStack"
+          name="secondArea"
+          value="estudar fullStack"
+        />
+        <label>Curto a carreira Fullstack</label>
+      </div>
+      <div class="p-2">
+        <label>Quais outras tecnologias você pretende aprender?</label><br />
+        <!-- Com textArea, usar onKeyUp ao invés de onChange, passando o this - próprio 
+        elemento como textArea como parâmetro -->
+        <textarea onkeyup="changeOtherTechs(this)" name="otherTechs" placeholder="Outras tecnologias"></textarea>
+      </div>
+      <button
+        id="buttonSend"
+        class="btn btn-outline-success m-2"
+        type="button"
+        onclick="sendAnswers()"
+      >
+        Enviar
+      </button>
+    </form>
     <p class="p-2 col-6" id="final-message"></p>
-<body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
