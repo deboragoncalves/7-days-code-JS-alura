@@ -1,3 +1,5 @@
 # 7DaysOfCode - Javascript
-Challenge of Alura, 7DaysOfCode in JS. 
-https://7daysofcode.io/matricula/logica-programacao
+## 2 challenges of Alura, 7DaysOfCode in JS.
+## Logic in JS: https://7daysofcode.io/matricula/logica-programacao
+## CRUD in JS: https://7daysofcode.io/matricula/javascript-e-dom
+
