@@ -2,6 +2,10 @@ form {
     margin: 0 auto;
 }
 
+.container-display-flex {
+    display: flex;
+}
+
 .container-display-column {
     display: flex;
     flex-direction: column;
@@ -10,4 +14,8 @@ form {
 
 #invalidName, #invalidBirthday {
     color: red
+}
+
+.text-margin-right {
+    margin-right: 20px;
 }

@@ -127,9 +127,36 @@ const saveBirthday = () => {
     let birthdayFormat = formatBirthday(birthday);
     if (!birthdayFormat) return;
 
-    console.log(birthdayFormat);
+    const dataPerson = {
+        name: username,
+        birthday: birthdayFormat
+    }
+
+    // Salvar em localStorage sempre como JSON string
+    localStorage.setItem('dataPerson', JSON.stringify(dataPerson));
+    showDataPerson();
 }
 
 buttonSave.addEventListener("click", saveBirthday);
 
-// TODO: data > dataAtual
+const showDataPerson = () => {
+    // Resgatar com JSON.parse
+    const dataPerson = JSON.parse(localStorage.getItem('dataPerson'));
+
+    let containerPerson = document.createElement("div");
+    containerPerson.classList.add("container-dislay-flex");
+
+    let namePerson = document.createElement("span");
+    namePerson.classList.add("text-margin-right");
+    namePerson.innerHTML = dataPerson.name;
+
+    let birthdayPerson = document.createElement("span");
+    birthdayPerson.innerHTML = dataPerson.birthday;
+
+    // Adicionar como filho do container
+    containerPerson.appendChild(namePerson);
+    containerPerson.appendChild(birthdayPerson);
+
+    let containerDataPeople = document.querySelector("#data-people");
+    containerDataPeople.appendChild(containerPerson);
+}
