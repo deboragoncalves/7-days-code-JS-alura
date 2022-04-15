@@ -19,3 +19,8 @@ form {
 .text-margin-right {
     margin-right: 20px;
 }
+
+.button-edit-birthday {
+    cursor: pointer;
+    margin-left: 20px;
+}

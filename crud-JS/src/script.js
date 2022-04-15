@@ -1,8 +1,10 @@
 var username, birthday;
 var buttonSave = document.querySelector("#buttonSave");
+var buttonEdit = document.querySelector("#buttonEdit");
 
 window.onload = () => {
     hiddenInvalidMessages();
+    buttonEdit.style.display = "none";
 }
 
 const showMessageInvalidName = () => {
@@ -135,9 +137,41 @@ const saveBirthday = () => {
     // Salvar em localStorage sempre como JSON string
     localStorage.setItem('dataPerson', JSON.stringify(dataPerson));
     showDataPerson();
+
+    cleanInputs();
 }
 
 buttonSave.addEventListener("click", saveBirthday);
+
+const editDataPerson = containerPerson => {
+
+    let spanContainerPerson = containerPerson.querySelectorAll("span");
+    spanContainerPerson[0].textContent = username;
+
+    let birthdayFormat = formatBirthday(birthday);
+    if (!birthdayFormat) return;
+    spanContainerPerson[1].textContent = birthdayFormat;
+
+    cleanInputs();
+    buttonSave.style.display = "block";
+}
+
+const editBirthday = containerPerson => {
+    let spanContainerPerson = containerPerson.querySelectorAll("span");
+    let namePerson = spanContainerPerson[0].textContent;
+    let birthdayPerson = spanContainerPerson[1].textContent;
+
+    // Preencher inputs
+    document.querySelector("#name").value = namePerson;
+    document.querySelector("#birthday").value = birthdayPerson;
+
+    buttonEdit.style.display = "block";
+    buttonSave.style.display = "none";
+
+    buttonEdit.addEventListener("click", () => {
+        editDataPerson(containerPerson);
+    })
+}
 
 const showDataPerson = () => {
     // Resgatar com JSON.parse
@@ -153,10 +187,29 @@ const showDataPerson = () => {
     let birthdayPerson = document.createElement("span");
     birthdayPerson.innerHTML = dataPerson.birthday;
 
+    let imageEditBirthday = document.createElement("img");
+    imageEditBirthday.src = "images/image-edit.svg";
+    imageEditBirthday.alt = "Editar dados da pessoa";
+    imageEditBirthday.classList.add("button-edit-birthday");
+    imageEditBirthday.addEventListener("click", () => {
+
+        // Passar como parâmetro o container
+        editBirthday(containerPerson);
+
+    });
+
     // Adicionar como filho do container
     containerPerson.appendChild(namePerson);
     containerPerson.appendChild(birthdayPerson);
+    containerPerson.appendChild(imageEditBirthday);
 
     let containerDataPeople = document.querySelector("#data-people");
     containerDataPeople.appendChild(containerPerson);
 }
+
+const cleanInputs = () => {
+    document.querySelector("#name").value = "";
+    document.querySelector("#birthday").value = "";
+}
+
+// TODO: ao editar, preencher campo da data

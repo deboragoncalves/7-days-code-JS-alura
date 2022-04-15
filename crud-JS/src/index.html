@@ -24,9 +24,14 @@
             <input onchange="changeBirthday()" required type="date" id="birthday" placeholder="Informe a data de nascimento da pessoa">
             <p id="invalidBirthday"></p>
         </div>
-        <button id="buttonSave" class="btn btn-outline-success m-2" type="button">
-            Salvar
-        </button>
+        <div class="container-display-flex">
+            <button id="buttonSave" class="btn btn-outline-success m-2" type="button">
+                Salvar
+            </button>
+            <button id="buttonEdit" class="btn btn-outline-success m-2" type="button">
+                Editar
+            </button>
+        </div>
     </form>
     <div class="col-10 p-2" id="data-people"></div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
