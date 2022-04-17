@@ -173,6 +173,11 @@ const editBirthday = containerPerson => {
     })
 }
 
+const deleteBirthday = containerPerson => {
+    let containerDataPeople = document.querySelector("#data-people");
+    containerDataPeople.removeChild(containerPerson);
+}
+
 const showDataPerson = () => {
     // Resgatar com JSON.parse
     const dataPerson = JSON.parse(localStorage.getItem('dataPerson'));
@@ -198,10 +203,21 @@ const showDataPerson = () => {
 
     });
 
+    let imageDeleteBirthday = document.createElement("img");
+    imageDeleteBirthday.src = "images/image-delete.svg";
+    imageDeleteBirthday.alt = "Deletar dados da pessoa";
+    imageDeleteBirthday.classList.add("button-delete-birthday");
+    imageDeleteBirthday.addEventListener("click", () => {
+
+        deleteBirthday(containerPerson);
+
+    });
+
     // Adicionar como filho do container
     containerPerson.appendChild(namePerson);
     containerPerson.appendChild(birthdayPerson);
     containerPerson.appendChild(imageEditBirthday);
+    containerPerson.appendChild(imageDeleteBirthday);
 
     let containerDataPeople = document.querySelector("#data-people");
     containerDataPeople.appendChild(containerPerson);

@@ -20,7 +20,7 @@ form {
     margin-right: 20px;
 }
 
-.button-edit-birthday {
+.button-edit-birthday, .button-delete-birthday {
     cursor: pointer;
     margin-left: 20px;
 }
