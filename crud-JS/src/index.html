@@ -13,7 +13,7 @@
 
 <body>
     <form class="col-10">
-        <p>Aniversários</p>
+        <h5 id="title">Aniversários</h5>
         <div class="col-6 container-display-column">
             <label for="name">Nome</label>
             <input onchange="changeName()" required minlength="3" maxlength="120" type="text" id="name" name="name" placeholder="Informe o nome da pessoa">
@@ -25,10 +25,10 @@
             <p id="invalidBirthday"></p>
         </div>
         <div class="container-display-flex">
-            <button id="buttonSave" class="btn btn-outline-success m-2" type="button">
+            <button id="buttonSave" class="btn btn-outline-success" type="button">
                 Salvar
             </button>
-            <button id="buttonEdit" class="btn btn-outline-success m-2" type="button">
+            <button id="buttonEdit" class="btn btn-outline-success" type="button">
                 Editar
             </button>
         </div>

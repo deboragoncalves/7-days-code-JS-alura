@@ -153,6 +153,7 @@ const editDataPerson = containerPerson => {
     spanContainerPerson[1].textContent = birthdayFormat;
 
     cleanInputs();
+    buttonEdit.style.marginLeft = "10px";
     buttonSave.style.display = "block";
 }
 
@@ -178,6 +179,31 @@ const deleteBirthday = containerPerson => {
     containerDataPeople.removeChild(containerPerson);
 }
 
+const addTitles = containerDataPeople => {
+    let containerTitles = document.createElement("div");
+    containerTitles.classList.add("container-dislay-flex");
+
+    let titleName = document.createElement("span");
+    titleName.innerHTML = "Nome";
+    titleName.classList.add("name-person");
+    titleName.classList.add("text-bold");
+    
+    let titleBirthday = document.createElement("span");
+    titleBirthday.innerHTML = "Aniversário";
+    titleBirthday.classList.add("text-bold");
+    titleBirthday.classList.add("birthday-person");
+
+    let titleActions = document.createElement("span");
+    titleActions.innerHTML = "Ações";
+    titleActions.classList.add("text-bold");
+
+    containerTitles.appendChild(titleName);
+    containerTitles.appendChild(titleBirthday);
+    containerTitles.appendChild(titleActions);
+
+    containerDataPeople.appendChild(containerTitles);
+}
+
 const showDataPerson = () => {
     // Resgatar com JSON.parse
     const dataPerson = JSON.parse(localStorage.getItem('dataPerson'));
@@ -185,11 +211,19 @@ const showDataPerson = () => {
     let containerPerson = document.createElement("div");
     containerPerson.classList.add("container-dislay-flex");
 
+    let containerDataPeople = document.querySelector("#data-people");
+    let firstChildDataPeople = containerDataPeople.firstChild;
+
+    if (!firstChildDataPeople) {
+        addTitles(containerDataPeople);
+    }
+
     let namePerson = document.createElement("span");
-    namePerson.classList.add("text-margin-right");
+    namePerson.classList.add("name-person");
     namePerson.innerHTML = dataPerson.name;
 
     let birthdayPerson = document.createElement("span");
+    birthdayPerson.classList.add("birthday-person");
     birthdayPerson.innerHTML = dataPerson.birthday;
 
     let imageEditBirthday = document.createElement("img");
@@ -219,7 +253,6 @@ const showDataPerson = () => {
     containerPerson.appendChild(imageEditBirthday);
     containerPerson.appendChild(imageDeleteBirthday);
 
-    let containerDataPeople = document.querySelector("#data-people");
     containerDataPeople.appendChild(containerPerson);
 }
 
@@ -228,4 +261,7 @@ const cleanInputs = () => {
     document.querySelector("#birthday").value = "";
 }
 
-// TODO: ao editar, preencher campo da data
+/* TODO: 
+- ao editar, preencher campo da data 
+- layout responsivo
+*/

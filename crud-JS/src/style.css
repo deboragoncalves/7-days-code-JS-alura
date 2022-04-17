@@ -2,6 +2,18 @@ form {
     margin: 0 auto;
 }
 
+img {
+    cursor: pointer;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+#title {
+    margin-top: 20px;
+}
+
 .container-display-flex {
     display: flex;
 }
@@ -16,11 +28,22 @@ form {
     color: red
 }
 
-.text-margin-right {
-    margin-right: 20px;
+#buttonSave, #buttonEdit {
+    margin: 10px 0 10px 0;
 }
 
-.button-edit-birthday, .button-delete-birthday {
-    cursor: pointer;
+/* Fixar largura span: display inline block */
+
+.name-person {
+    width: 250px;
+    display: inline-block;
+}
+
+.birthday-person {
+    width: 100px;
+    display: inline-block;
+}
+
+.button-delete-birthday {
     margin-left: 20px;
 }
