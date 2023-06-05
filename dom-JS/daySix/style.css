@@ -1,0 +1,110 @@
+body {
+    background: #17162E;;
+}
+
+p {
+    color: #fff;
+}
+
+.container-filmes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.titulo-filmes {
+    font-family: 'Kumbh Sans';
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 45px;
+    color: #FFFFFF;
+    width: 282px;
+    height: 45px;
+    margin-top: 62px;
+    margin-bottom: 48px;
+}
+
+.container-input {
+    display: flex;
+}
+
+.container-input input {
+    background: #8A8A8A;
+    font-family: 'Kumbh Sans';
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    width: 634px !important;
+    height: 54px !important;
+    border: none;
+}
+
+.container-input button {
+    margin-left: 10px;
+}
+
+.container-input button:hover {
+    color: #fff;
+}
+
+.container-input-favoritos {
+    margin-top: 30px;
+    margin-bottom: 64px;
+}
+
+.container-input-favoritos label {
+    color: #fff;
+}
+
+.container-descricao-filme {
+    background: #1D1C3B;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 201px;
+    margin-bottom: 48px;
+    padding: 0 108px;
+}
+
+.container-descricao-filme img {
+    margin-right: 30px;
+}
+
+.texto-descricao-filme {
+    font-family: 'Kumbh Sans';
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 32px;
+    height: 128px;
+    width: 592px;
+    left: 595px;
+}
+
+.container-nome-filme {
+    width: 700px;
+}
+
+.container-icones {
+    display: flex;
+}
+
+.container-icones p {
+    margin-bottom: 0 !important;
+}
+
+.container-icones img {
+    margin-right: 12px;
+}
+
+.container-icone-estrela {
+    margin-right: 45px;
+}
+
+.descricao-filme {
+    margin-left: 15px;
+}
+
+#icone-heart {
+    cursor: pointer;
+}
