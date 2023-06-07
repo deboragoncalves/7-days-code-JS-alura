@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #14161C;
+}
+
+header {
+    height: 80px;
+    border-bottom: 1px solid #585858;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 51px;
+    height: 51px;
+    background: #F9FF00;
+    margin-left: 71px;
+}
+
+.logo span {
+    width: 51px;
+    height: 51px;
+    font-family: 'Inter';
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2F2D2D;
+}
+
+.container-palavras {
+    margin-top: 112px;
+}
+
+.container-teclado {
+    margin-top: 38px;
+    margin-bottom: 149px;
+}
+
+.container-teclado, .container-linha-palavra {
+    display: flex;
+    justify-content: center;
+}
+
+.teclado {
+    width: 460px;
+    height: 184px;
+    background: #14161C;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-linha-teclado {
+    display: flex;
+}
+
+.tecla {
+    width: 43px;
+    height: 58px;
+}
+
+.tecla-enter {
+    width: 83px;
+    height: 58px;
+}
+
+.tecla, .tecla-enter {
+    background: #818384;
+    margin: 1.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tecla span, .tecla-enter span {
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+}
+
+.tecla span {
+    width: 43px;
+    height: 58px;
+    font-size: 20px;
+    line-height: 27px;
+}
+
+.tecla-enter span {
+    font-size: 17px;
+    line-height: 21px;
+    text-transform: uppercase;
+}
+
+.letra {
+    width: 62px;
+    height: 62px;
+    margin: 1.5px;
+    background: #14161C;
+    border: 1px solid #585858;
+}
