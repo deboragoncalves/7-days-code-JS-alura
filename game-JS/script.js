@@ -25,7 +25,7 @@ const getKeyDown = () => {
         let codeKey = e.code;
 
         // somente letras, enter ou backspace
-        if (codeKey.startsWith("Key") || codeKey == "Backspace") {
+        if (codeKey.startsWith("Key") || codeKey == "Backspace" || codeKey == "Delete") {
             if (countSixthWord >= 5) return;
             userKeyPressed = e.key;
             showFirstWord();
@@ -40,6 +40,7 @@ const getAllWords = async () => {
         .catch(error => console.log(error));
     
     wordCorrect = getWord(arrayWords);
+    console.log(wordCorrect);
 }
 
 const getWord = arrayWords => {
@@ -54,29 +55,43 @@ const getWord = arrayWords => {
 const checkCorrectWord = word => {
     let userWord = word.toUpperCase();
     wordCorrect = wordCorrect.toUpperCase();
-    return userWord == wordCorrect;
+    let rightAnswer = userWord == wordCorrect;
+    return rightAnswer;
+}
+
+const addBackgroundColor = (containerLetters, counter) => {
+    userKeyPressed = userKeyPressed.toUpperCase();
+    wordCorrect = wordCorrect.toUpperCase();
+
+    if (wordCorrect[counter] == userKeyPressed) {
+        containerLetters[counter].style.backgroundColor = "green";
+    } else if (wordCorrect.includes(userKeyPressed)) {
+        containerLetters[counter].style.backgroundColor = "yellow";
+    } else if (!wordCorrect.includes(userKeyPressed)) {
+        containerLetters[counter].style.backgroundColor = "gray";
+    }
+
 }
 
 const showFirstWord = () => {
     let containerLetters = document.querySelectorAll("#primeira-palavra div");
-
+    let keyPressedDelete = userKeyPressed == "Backspace" || userKeyPressed == "Delete";
+    let keyPressedNotDelete = userKeyPressed != "Backspace" && userKeyPressed != "Delete";
+    
     // deletar ultima letra
-    if (userKeyPressed == "Backspace" && containerLetters[countFirstWord]) {
+    if (keyPressedDelete && containerLetters[countFirstWord]) {
         containerLetters[countFirstWord].textContent = "";
+        containerLetters[countFirstWord].style.backgroundColor = "transparent";
         countFirstWord--;
         return;
     }
 
-    // verificar se está certa
-    if (userFirstWord.length == 5) {
+    // verificar se está certa e ir para proxima palavra
+    if (countFirstWord == 5) {
         checkCorrectWord(userFirstWord);
-    }
-    
-    // proxima palavra
-    if (countFirstWord >= 5) {
         showSecondWord();
         return;
-    } 
+    }
 
     // se todas as letras foram deletadas
     if (!containerLetters[countFirstWord]) {
@@ -84,8 +99,9 @@ const showFirstWord = () => {
         containerLetters[countFirstWord].classList.add("letra");
     }
 
-    if (userKeyPressed != "Backspace") {
+    if (keyPressedNotDelete) {
         containerLetters[countFirstWord].textContent = userKeyPressed;
+        addBackgroundColor(containerLetters, countFirstWord);
         userFirstWord += userKeyPressed;
         countFirstWord++;
     }
@@ -93,29 +109,30 @@ const showFirstWord = () => {
 
 const showSecondWord = () => {
     let containerLetters = document.querySelectorAll("#segunda-palavra div");
-
-    if (userKeyPressed == "Backspace" && containerLetters[countSecondWord]) {
+    let keyPressedDelete = userKeyPressed == "Backspace" || userKeyPressed == "Delete";
+    let keyPressedNotDelete = userKeyPressed != "Backspace" && userKeyPressed != "Delete";
+    
+    if (keyPressedDelete && containerLetters[countSecondWord]) {
         containerLetters[countSecondWord].textContent = "";
+        containerLetters[countSecondWord].style.backgroundColor = "transparent";
         countSecondWord--;
         return;
     }
 
-    if (userSecondWord.length == 5) {
+    if (countSecondWord == 5) {
         checkCorrectWord(userSecondWord);
-    }
-
-    if (countSecondWord >= 5) {
         showThirdWord();
         return;
-    } 
+    }
 
     if (!containerLetters[countSecondWord]) {
         containerLetters[countSecondWord] = document.createElement("div");
         containerLetters[countSecondWord].classList.add("letra");
     }
 
-    if (userKeyPressed != "Backspace") {
+    if (keyPressedNotDelete) {
         containerLetters[countSecondWord].textContent = userKeyPressed;
+        addBackgroundColor(containerLetters, countSecondWord);
         userSecondWord += userKeyPressed;
         countSecondWord++;
     }
@@ -123,29 +140,30 @@ const showSecondWord = () => {
 
 const showThirdWord = () => {
     let containerLetters = document.querySelectorAll("#terceira-palavra div");
+    let keyPressedDelete = userKeyPressed == "Backspace" || userKeyPressed == "Delete";
+    let keyPressedNotDelete = userKeyPressed != "Backspace" && userKeyPressed != "Delete";
 
-    if (userKeyPressed == "Backspace" && containerLetters[countThirdWord]) {
+    if (keyPressedDelete && containerLetters[countThirdWord]) {
         containerLetters[countThirdWord].textContent = "";
+        containerLetters[countThirdWord].style.backgroundColor = "transparent";
         countThirdWord--;
         return;
     }
 
-    if (userThirdWord.length == 5) {
+    if (countThirdWord == 5) {
         checkCorrectWord(userThirdWord);
-    }
-
-    if (countThirdWord >= 5) {
         showFourthWord();
         return;
-    } 
+    }
 
     if (!containerLetters[countThirdWord]) {
         containerLetters[countThirdWord] = document.createElement("div");
         containerLetters[countThirdWord].classList.add("letra");
     }
 
-    if (userKeyPressed != "Backspace") {
+    if (keyPressedNotDelete) {
         containerLetters[countThirdWord].textContent = userKeyPressed;
+        addBackgroundColor(containerLetters, countThirdWord);
         userThirdWord += userKeyPressed;
         countThirdWord++;
     }
@@ -153,18 +171,18 @@ const showThirdWord = () => {
 
 const showFourthWord = () => {
     let containerLetters = document.querySelectorAll("#quarta-palavra div");
+    let keyPressedDelete = userKeyPressed == "Backspace" || userKeyPressed == "Delete";
+    let keyPressedNotDelete = userKeyPressed != "Backspace" && userKeyPressed != "Delete";
 
-    if (userKeyPressed == "Backspace" && containerLetters[countFourthWord]) {
+    if (keyPressedDelete && containerLetters[countFourthWord]) {
         containerLetters[countFourthWord].textContent = "";
+        containerLetters[countFourthWord].style.backgroundColor = "transparent";
         countFourthWord--;
         return;
     }
 
-    if (userFourthWord.length == 5) {
+    if (countFourthWord == 5) {
         checkCorrectWord(userFourthWord);
-    }
-
-    if (countFourthWord >= 5) {
         showFifthWord();
         return;
     }
@@ -174,8 +192,9 @@ const showFourthWord = () => {
         containerLetters[countFourthWord].classList.add("letra");
     }
 
-    if (userKeyPressed != "Backspace") {
+    if (keyPressedNotDelete) {
         containerLetters[countFourthWord].textContent = userKeyPressed;
+        addBackgroundColor(containerLetters, countFourthWord);
         userFourthWord += userKeyPressed;
         countFourthWord++;
     }
@@ -183,18 +202,18 @@ const showFourthWord = () => {
 
 const showFifthWord = () => {
     let containerLetters = document.querySelectorAll("#quinta-palavra div");
-
-    if (userKeyPressed == "Backspace" && containerLetters[countFifthWord]) {
+    let keyPressedDelete = userKeyPressed == "Backspace" || userKeyPressed == "Delete";
+    let keyPressedNotDelete = userKeyPressed != "Backspace" && userKeyPressed != "Delete";
+       
+    if (keyPressedDelete && containerLetters[countFifthWord]) {
         containerLetters[countFifthWord].textContent = "";
+        containerLetters[countFifthWord].style.backgroundColor = "transparent";
         countFifthWord--;
         return;
     }
 
-    if (userFifthWord.length == 5) {
+    if (countFifthWord == 5) {
         checkCorrectWord(userFifthWord);
-    }
-
-    if (countFifthWord >= 5) {
         showSixthWord();
         return;
     }
@@ -204,8 +223,9 @@ const showFifthWord = () => {
         containerLetters[countFifthWord].classList.add("letra");
     }
 
-    if (userKeyPressed != "Backspace") {
+    if (keyPressedNotDelete) {
         containerLetters[countFifthWord].textContent = userKeyPressed;
+        addBackgroundColor(containerLetters, countFifthWord);
         userFifthWord += userKeyPressed;
         countFifthWord++;
     }
@@ -214,18 +234,18 @@ const showFifthWord = () => {
 
 const showSixthWord = () => {
     let containerLetters = document.querySelectorAll("#sexta-palavra div");
-
-    if (userKeyPressed == "Backspace" && containerLetters[countSixthWord]) {
+    let keyPressedDelete = userKeyPressed == "Backspace" || userKeyPressed == "Delete";
+    let keyPressedNotDelete = userKeyPressed != "Backspace" && userKeyPressed != "Delete";
+    
+    if (keyPressedDelete && containerLetters[countSixthWord]) {
         containerLetters[countSixthWord].textContent = "";
+        containerLetters[countSixthWord].style.backgroundColor = "transparent";
         countSixthWord--;
         return;
     }
 
-    if (userSixthWord.length == 5) {
+    if (countSixthWord == 5) {
         checkCorrectWord(userSixthWord);
-    }
-
-    if (countSixthWord >= 5) {
         return;
     }
 
@@ -234,8 +254,9 @@ const showSixthWord = () => {
         containerLetters[countSixthWord].classList.add("letra");
     }
 
-    if (userKeyPressed != "Backspace") {
+    if (keyPressedNotDelete) {
         containerLetters[countSixthWord].textContent = userKeyPressed;
+        addBackgroundColor(containerLetters, countSixthWord);
         userSixthWord += userKeyPressed;
         countSixthWord++;
     }
@@ -243,3 +264,4 @@ const showSixthWord = () => {
 }
 
 // TODO: Refatorar criando uma só função generica que serve para todas as palavras 
+// TODO: Exibir alerta se palavra for correta
