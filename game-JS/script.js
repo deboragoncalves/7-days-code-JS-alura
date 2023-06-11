@@ -1,5 +1,6 @@
 var userKeyPressed = "";
 let wordCorrect = "";
+let rightAnswer = false;
 
 let countFirstWord = 0,
     countSecondWord = 0,
@@ -22,6 +23,7 @@ window.onload = () => {
 
 const getKeyDown = () => {
     document.addEventListener("keydown", e => {
+        if (rightAnswer) return;
         let codeKey = e.code;
 
         // somente letras, enter ou backspace
@@ -52,10 +54,23 @@ const getWord = arrayWords => {
     return arrayWords[getNumber];
 }
 
+const showAlert = () => {
+    Toastify({
+        text: "Congrats, you got it!",
+        position: "center",
+        style: {
+            fontFamily: "Arial, sans-serif",
+            background: "#538D4E"
+        },
+        duration: 3000
+    }).showToast();
+}
+
 const checkCorrectWord = word => {
     let userWord = word.toUpperCase();
     wordCorrect = wordCorrect.toUpperCase();
-    let rightAnswer = userWord == wordCorrect;
+    rightAnswer = userWord == wordCorrect;
+    if (rightAnswer) showAlert();
     return rightAnswer;
 }
 
@@ -64,11 +79,11 @@ const addBackgroundColor = (containerLetters, counter) => {
     wordCorrect = wordCorrect.toUpperCase();
 
     if (wordCorrect[counter] == userKeyPressed) {
-        containerLetters[counter].style.backgroundColor = "green";
+        containerLetters[counter].style.backgroundColor = "#538D4E";
     } else if (wordCorrect.includes(userKeyPressed)) {
-        containerLetters[counter].style.backgroundColor = "yellow";
+        containerLetters[counter].style.backgroundColor = "#B59F3B";
     } else if (!wordCorrect.includes(userKeyPressed)) {
-        containerLetters[counter].style.backgroundColor = "gray";
+        containerLetters[counter].style.backgroundColor = "#585858";
     }
 
 }
@@ -89,7 +104,12 @@ const showFirstWord = () => {
     // verificar se está certa e ir para proxima palavra
     if (countFirstWord == 5) {
         checkCorrectWord(userFirstWord);
-        showSecondWord();
+
+        if (!rightAnswer) {
+            showSecondWord();
+            return;
+        }
+        
         return;
     }
 
@@ -121,7 +141,12 @@ const showSecondWord = () => {
 
     if (countSecondWord == 5) {
         checkCorrectWord(userSecondWord);
-        showThirdWord();
+
+        if (!rightAnswer) {
+            showThirdWord();
+            return;
+        }
+
         return;
     }
 
@@ -152,7 +177,12 @@ const showThirdWord = () => {
 
     if (countThirdWord == 5) {
         checkCorrectWord(userThirdWord);
-        showFourthWord();
+
+        if (!rightAnswer) {
+            showFourthWord();
+            return;
+        }
+
         return;
     }
 
@@ -183,7 +213,12 @@ const showFourthWord = () => {
 
     if (countFourthWord == 5) {
         checkCorrectWord(userFourthWord);
-        showFifthWord();
+
+        if (!rightAnswer) {
+            showFifthWord();
+            return;
+        }
+        
         return;
     }
 
@@ -214,7 +249,12 @@ const showFifthWord = () => {
 
     if (countFifthWord == 5) {
         checkCorrectWord(userFifthWord);
-        showSixthWord();
+
+        if (!rightAnswer) {
+            showSixthWord();
+            return;
+        }
+
         return;
     }
 
