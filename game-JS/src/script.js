@@ -2,6 +2,8 @@ var userKeyPressed = "";
 let wordCorrect = "";
 let rightAnswer = false;
 
+let codeKey = "";
+
 let countFirstWord = 0,
     countSecondWord = 0,
     countThirdWord = 0,
@@ -9,12 +11,26 @@ let countFirstWord = 0,
     countFifthWord = 0,
     countSixthWord = 0;
 
+let letterClicked = "";
+let elementButtonLetter = "";
+
 let userFirstWord = "",
     userSecondWord = "",
     userThirdWord = "",
     userFourthWord = "",
     userFifthWord = "",
     userSixthWord = "";
+
+let buttonsLetters = document.querySelectorAll(".letra-teclado");
+buttonsLetters.forEach(buttonLetter => {
+    buttonLetter.addEventListener("click", (e) => {
+        elementButtonLetter = buttonLetter;
+        // pegar letra clickada no teclado
+        letterClicked = e.target.value;
+        letterClicked = letterClicked.toUpperCase();
+        showFirstWord();
+    })    
+});
 
 window.onload = () => {
     getAllWords();
@@ -24,7 +40,7 @@ window.onload = () => {
 const getKeyDown = () => {
     document.addEventListener("keydown", e => {
         if (rightAnswer) return;
-        let codeKey = e.code;
+        codeKey = e.code;
 
         // somente letras, enter ou backspace
         if (codeKey.startsWith("Key") || codeKey == "Backspace" || codeKey == "Delete") {
@@ -75,17 +91,28 @@ const checkCorrectWord = word => {
 }
 
 const addBackgroundColor = (containerLetters, counter) => {
-    userKeyPressed = userKeyPressed.toUpperCase();
-    wordCorrect = wordCorrect.toUpperCase();
+    let letter = "";
 
-    if (wordCorrect[counter] == userKeyPressed) {
-        containerLetters[counter].style.backgroundColor = "#538D4E";
-    } else if (wordCorrect.includes(userKeyPressed)) {
-        containerLetters[counter].style.backgroundColor = "#B59F3B";
-    } else if (!wordCorrect.includes(userKeyPressed)) {
-        containerLetters[counter].style.backgroundColor = "#585858";
+    // ver se letra foi do teclado do usuario ou teclado desenho
+    if (!codeKey) {
+        letter = letterClicked;
+    } else {
+        letter = userKeyPressed;
     }
 
+    letter = letter.toUpperCase();
+    wordCorrect = wordCorrect.toUpperCase();
+
+    if (wordCorrect[counter] == letter) {
+        containerLetters[counter].style.backgroundColor = "#538D4E";
+        elementButtonLetter.style.background = "#538D4E";
+    } else if (wordCorrect.includes(letter)) {
+        containerLetters[counter].style.backgroundColor = "#B59F3B";
+        elementButtonLetter.style.background = "#B59F3B";
+    } else if (!wordCorrect.includes(letter)) {
+        containerLetters[counter].style.backgroundColor = "#585858";
+        elementButtonLetter.style.background = "#585858";
+    }
 }
 
 const showFirstWord = () => {
@@ -120,9 +147,16 @@ const showFirstWord = () => {
     }
 
     if (keyPressedNotDelete) {
-        containerLetters[countFirstWord].textContent = userKeyPressed;
+        // se letra não foi pressionada no teclado do usuário, pegar a letra do teclado desenhado
+        if (!codeKey) {
+            containerLetters[countFirstWord].textContent = letterClicked;
+            userFirstWord += letterClicked;
+        } else {
+            containerLetters[countFirstWord].textContent = userKeyPressed;
+            userFirstWord += userKeyPressed;
+        }
+
         addBackgroundColor(containerLetters, countFirstWord);
-        userFirstWord += userKeyPressed;
         countFirstWord++;
     }
 }
@@ -156,9 +190,15 @@ const showSecondWord = () => {
     }
 
     if (keyPressedNotDelete) {
-        containerLetters[countSecondWord].textContent = userKeyPressed;
+        if (!codeKey) {
+            containerLetters[countSecondWord].textContent = letterClicked;
+            userSecondWord += letterClicked;
+        } else {
+            containerLetters[countSecondWord].textContent = userKeyPressed;
+            userSecondWord += userKeyPressed;
+        }
+        
         addBackgroundColor(containerLetters, countSecondWord);
-        userSecondWord += userKeyPressed;
         countSecondWord++;
     }
 }
@@ -192,9 +232,15 @@ const showThirdWord = () => {
     }
 
     if (keyPressedNotDelete) {
-        containerLetters[countThirdWord].textContent = userKeyPressed;
+        if (!codeKey) {
+            containerLetters[countThirdWord].textContent = letterClicked;
+            userThirdWord += letterClicked;
+        } else {
+            containerLetters[countThirdWord].textContent = userKeyPressed;
+            userThirdWord += userKeyPressed;
+        }
+
         addBackgroundColor(containerLetters, countThirdWord);
-        userThirdWord += userKeyPressed;
         countThirdWord++;
     }
 }
@@ -228,9 +274,15 @@ const showFourthWord = () => {
     }
 
     if (keyPressedNotDelete) {
-        containerLetters[countFourthWord].textContent = userKeyPressed;
+        if (!codeKey) {
+            containerLetters[countFourthWord].textContent = letterClicked;
+            userFourthWord += letterClicked;
+        } else {
+            containerLetters[countFourthWord].textContent = userKeyPressed;
+            userFourthWord += userKeyPressed;
+        }
+        
         addBackgroundColor(containerLetters, countFourthWord);
-        userFourthWord += userKeyPressed;
         countFourthWord++;
     }
 }
@@ -264,9 +316,15 @@ const showFifthWord = () => {
     }
 
     if (keyPressedNotDelete) {
-        containerLetters[countFifthWord].textContent = userKeyPressed;
+        if (!codeKey) {
+            containerLetters[countFifthWord].textContent = letterClicked;
+            userFifthWord += letterClicked;
+        } else {
+            containerLetters[countFifthWord].textContent = userKeyPressed;
+            userFifthWord += userKeyPressed;
+        }
+
         addBackgroundColor(containerLetters, countFifthWord);
-        userFifthWord += userKeyPressed;
         countFifthWord++;
     }
 
@@ -295,13 +353,19 @@ const showSixthWord = () => {
     }
 
     if (keyPressedNotDelete) {
-        containerLetters[countSixthWord].textContent = userKeyPressed;
+        if (!codeKey) {
+            containerLetters[countSixthWord].textContent = letterClicked;
+            userSixthWord += letterClicked;
+        } else {
+            containerLetters[countSixthWord].textContent = userKeyPressed;
+            userSixthWord += userKeyPressed;
+        }
+        
         addBackgroundColor(containerLetters, countSixthWord);
-        userSixthWord += userKeyPressed;
         countSixthWord++;
     }
 
 }
 
 // TODO: Refatorar criando uma só função generica que serve para todas as palavras 
-// TODO: Exibir alerta se palavra for correta
+// TODO: Implementar evento Enter no teclado desenhado
