@@ -86,7 +86,11 @@ const checkCorrectWord = word => {
     let userWord = word.toUpperCase();
     wordCorrect = wordCorrect.toUpperCase();
     rightAnswer = userWord == wordCorrect;
-    if (rightAnswer) showAlert();
+    if (rightAnswer) {
+        showAlert();
+        let containerButton = document.querySelector(".container-button");
+        containerButton.style.display = "flex";
+    }
     return rightAnswer;
 }
 
@@ -105,12 +109,15 @@ const addBackgroundColor = (containerLetters, counter) => {
 
     if (wordCorrect[counter] == letter) {
         containerLetters[counter].style.backgroundColor = "#538D4E";
+        if (!elementButtonLetter) return;
         elementButtonLetter.style.background = "#538D4E";
     } else if (wordCorrect.includes(letter)) {
         containerLetters[counter].style.backgroundColor = "#B59F3B";
+        if (!elementButtonLetter) return;
         elementButtonLetter.style.background = "#B59F3B";
     } else if (!wordCorrect.includes(letter)) {
         containerLetters[counter].style.backgroundColor = "#585858";
+        if (!elementButtonLetter) return;
         elementButtonLetter.style.background = "#585858";
     }
 }
@@ -367,5 +374,41 @@ const showSixthWord = () => {
 
 }
 
-// TODO: Refatorar criando uma só função generica que serve para todas as palavras 
-// TODO: Implementar evento Enter no teclado desenhado
+const clearContainerWord = containerWord => {
+    if (!containerWord) return;
+    containerWord.forEach(divWord => {
+        divWord.innerHTML = "";
+        divWord.style.background = "none";
+    })
+}
+const playAgain = () => {
+    // limpar container letras
+    let containerFirstWord = document.querySelectorAll("#primeira-palavra div");
+    clearContainerWord(containerFirstWord);
+
+    let containerSecondWord = document.querySelectorAll("#segunda-palavra div");
+    clearContainerWord(containerSecondWord);
+
+    let containerThirdWord = document.querySelectorAll("#terceira-palavra div");
+    clearContainerWord(containerThirdWord);
+
+    let containerFourthWord = document.querySelectorAll("#quarta-palavra div");
+    clearContainerWord(containerFourthWord);
+
+    let containerFifthWord = document.querySelectorAll("#quinta-palavra div");
+    clearContainerWord(containerFifthWord);
+
+    let containerSixthWord = document.querySelectorAll("#sexta-palavra div");
+    clearContainerWord(containerSixthWord);
+
+    // limpar teclado
+    let buttonsLetters = document.querySelectorAll(".letra-teclado");
+    buttonsLetters.forEach(buttonLetter => {
+        buttonLetter.style.background = "none";
+    })
+}
+
+// TODO: Refatorar criando uma só função generica que serve para todas as palavras
+// TODO: Implementar evento Enter/Apagar no teclado desenhado
+// TODO: Bug - se for ultima palavra, não reconhece o acerto
+// TODO: Bug - depois de limpar container, não consegue jogar novamente
