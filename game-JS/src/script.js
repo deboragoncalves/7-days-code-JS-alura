@@ -83,6 +83,7 @@ const showAlert = () => {
 }
 
 const checkCorrectWord = word => {
+    if (!word) return;
     let userWord = word.toUpperCase();
     wordCorrect = wordCorrect.toUpperCase();
     rightAnswer = userWord == wordCorrect;
@@ -349,11 +350,6 @@ const showSixthWord = () => {
         return;
     }
 
-    if (countSixthWord == 5) {
-        checkCorrectWord(userSixthWord);
-        return;
-    }
-
     if (!containerLetters[countSixthWord]) {
         containerLetters[countSixthWord] = document.createElement("div");
         containerLetters[countSixthWord].classList.add("letra");
@@ -372,6 +368,15 @@ const showSixthWord = () => {
         countSixthWord++;
     }
 
+    if (countSixthWord == 5) {
+        checkCorrectWord(userSixthWord);
+        if (!rightAnswer) {
+            let containerButton = document.querySelector(".container-button");
+            containerButton.style.display = "flex";      
+        }
+        return;
+    }
+
 }
 
 const clearContainerWord = containerWord => {
@@ -381,6 +386,7 @@ const clearContainerWord = containerWord => {
         divWord.style.background = "none";
     })
 }
+
 const playAgain = () => {
     // limpar container letras
     let containerFirstWord = document.querySelectorAll("#primeira-palavra div");
@@ -405,10 +411,16 @@ const playAgain = () => {
     let buttonsLetters = document.querySelectorAll(".letra-teclado");
     buttonsLetters.forEach(buttonLetter => {
         buttonLetter.style.background = "none";
-    })
+    });
+
+    countFirstWord = 0;
+    countSecondWord = 0;
+    countThirdWord = 0;
+    countFourthWord = 0;
+    countFifthWord = 0;
+    countSixthWord = 0;
+    rightAnswer = false;
 }
 
 // TODO: Refatorar criando uma só função generica que serve para todas as palavras
-// TODO: Implementar evento Enter/Apagar no teclado desenhado
-// TODO: Bug - se for ultima palavra, não reconhece o acerto
-// TODO: Bug - depois de limpar container, não consegue jogar novamente
+// TODO: Implementar evento Apagar no teclado desenhado
