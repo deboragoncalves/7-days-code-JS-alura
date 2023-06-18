@@ -1,0 +1,105 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 48.84px;
+}
+
+ul li {
+    list-style-type: none;
+    cursor: pointer;
+}
+
+header img {
+    padding: 10px 30px;
+    display: flex;
+    align-items: center;
+}
+
+.list-menu {
+    display: flex;
+    height: 20px;
+
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+
+    color: #202020;
+    padding: 10px 30px;
+}
+
+.container-newsletter {
+    display: flex;
+}
+
+.container-text-newsletter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 585px;
+    height: 462px;
+}
+
+.text-best-plants {
+    width: 375px;
+    text-align: center;
+    font-family: 'Elsie Swash Caps', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 50px;
+    color: #202020;
+    margin-top: 12px;
+}
+
+.text-plants {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
+    line-height: 27px;
+    color: #202020;
+    opacity: 0.5;
+}
+
+.bigger-text-plants {
+    width: 381px;
+    height: 99px;
+    margin-top: 24px;
+    font-size: 16px;
+}
+
+.container-plant-newsletter {
+    background: url("assets/image-yellow.png");
+    background-repeat: no-repeat;
+}
+
+.container-plant-newsletter img {
+    width: 787px;
+    height: 750px;
+}
+
+.container-email {
+    display: flex;
+    justify-content: center;
+}
+
+.container-email input {
+    height: 70px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    line-height: 20px;
+    color: #202020;
+    padding-left: 35px;
+    opacity: 0.3;
+}
+
+.container-email button {
+    cursor: pointer;
+    width: 194px;
+    height: 75px;
+    border: none;
+    background: #FFCB47;
+    color: #fff;
+    font-family: 'Montserrat';
+    font-size: 16px;
+    line-height: 20px;
+}
