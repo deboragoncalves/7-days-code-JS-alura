@@ -1,20 +1,14 @@
-import sendgrid from '@sendgrid/mail';
+import { API_KEY } from './apiKey.js';
+import emailjs from '@emailjs/browser';
 
-sendgrid.setApiKey("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")
+const SERVICE_ID = "service_pklqwo6";
+const TEMPLATE_ID = "template_5053gew";
 
-const messageNewsletter = {
-  to: 'deboracristinapereira123@gmail.com', 
-  from: 'testeEmail@testeEmail.com',
-  subject: 'Newsletter Casa Verde',
-  text: 'Olá, Boas-vindas à Casa Verde! Você se cadastrou em nossa newsletter e vai começar a receber e-mails com as novidades de nossa loja e dicas de como cuidar de suas plantas. Até logo!',
-}
-
-export const sendEmailNewsletter = () => {
-    sendgrid.send(messageNewsletter)
-    .then(() => {
-        console.log('Email enviado')
-    })
-    .catch((error) => {
-        console.error(error);
-    });
+export const sendEmailNewsletter = form => {
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form, API_KEY)
+      .then((result) => {
+          console.log(result.text);
+      }, (error) => {
+          console.log(error.text);
+      });
 }
