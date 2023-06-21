@@ -1,5 +1,6 @@
 import imagePlant from '../assets/image-plant.png';
 import backgroundYellow from '../assets/image-yellow.png';
+import { sendEmailNewsletter } from '../sendEmailApi.js';
 import styled from 'styled-components';
 import { useState } from 'react';
 
@@ -110,6 +111,8 @@ function AssinaturaNewsletter() {
             
             let mensagemEmailValido = `Obrigado pela sua assinatura, você receberá nossas novidades no e-mail ${email}`;
             alert(mensagemEmailValido);
+            // TODO: Corrigir bug CORS
+            sendEmailNewsletter();
         }
     }
 
