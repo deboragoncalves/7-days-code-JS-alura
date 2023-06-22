@@ -1,11 +1,11 @@
-import AssinaturaNewsletter from "./AssinaturaNewsletter";
+import Newsletter from "./Newsletter";
 import Menu from "./Menu";
 
 function HomePage() {
     return (
         <main>
             <Menu></Menu>
-            <AssinaturaNewsletter></AssinaturaNewsletter>
+            <Newsletter></Newsletter>
         </main>
     );
   }

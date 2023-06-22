@@ -1,3 +1,4 @@
+import Offers from './Offers';
 import imagePlant from '../assets/image-plant.png';
 import backgroundYellow from '../assets/image-yellow.png';
 import { sendEmailNewsletter } from '../sendEmailApi.js';
@@ -93,7 +94,7 @@ const ContainerPlantNewsletter = styled.section`
     }
 `;
 
-function AssinaturaNewsletter() {
+function Newsletter() {
     const form = useRef();
     const [email, setEmail] = useState();
     const [username, setUsername] = useState();
@@ -112,7 +113,7 @@ function AssinaturaNewsletter() {
             setErrors({
                 email: ""
             });
-            
+
             let mensagemEmailValido = `Obrigado pela sua assinatura, você receberá nossas novidades no e-mail ${email}`;
             alert(mensagemEmailValido);
 
@@ -122,32 +123,35 @@ function AssinaturaNewsletter() {
     }
 
     return (
-        <MainContainer>
-            <section>
-                <TextNewsletterContainer>
-                    <TextPlants>Sua casa com as</TextPlants>
-                    <TextBestPlants>melhores plantas</TextBestPlants>
-                    <BiggerTextPlants>Encontre aqui uma vasta seleção de plantas para decorar a sua casa e torná-lo uma pessoa mais feliz no seu dia a dia. Entre com seu e-mail e assine nossa newsletter para saber das novidades da marca.</BiggerTextPlants>
-                </TextNewsletterContainer>
-                <ContainerEmail>
-                    <form ref={form} onSubmit={validate}>
-                        <input
-                            onChange={e => {
-                                setEmail(e.target.value);
-                                if (email && email.includes("@")) setUsername(email.split("@")[0]);
-                            }}
-                            value={email} id="email" name="user_email" type="email" placeholder="Insira seu email" />
-                        <input value={username} type="hidden" name="user_name" />
-                        <button type="submit">Assinar newsletter</button>
-                    </form>
-                </ContainerEmail>
-                {errors.email && <MensagemErro>{errors.email}</MensagemErro>}
-            </section>
-            <ContainerPlantNewsletter>
-                <img alt="Planta" src={imagePlant}></img>
-            </ContainerPlantNewsletter>
-        </MainContainer>
+        <>
+            <MainContainer>
+                <section>
+                    <TextNewsletterContainer>
+                        <TextPlants>Sua casa com as</TextPlants>
+                        <TextBestPlants>melhores plantas</TextBestPlants>
+                        <BiggerTextPlants>Encontre aqui uma vasta seleção de plantas para decorar a sua casa e torná-lo uma pessoa mais feliz no seu dia a dia. Entre com seu e-mail e assine nossa newsletter para saber das novidades da marca.</BiggerTextPlants>
+                    </TextNewsletterContainer>
+                    <ContainerEmail>
+                        <form ref={form} onSubmit={validate}>
+                            <input
+                                onChange={e => {
+                                    setEmail(e.target.value);
+                                    if (email && email.includes("@")) setUsername(email.split("@")[0]);
+                                }}
+                                value={email} id="email" name="user_email" type="email" placeholder="Insira seu email" />
+                            <input value={username} type="hidden" name="user_name" />
+                            <button type="submit">Assinar newsletter</button>
+                        </form>
+                    </ContainerEmail>
+                    {errors.email && <MensagemErro>{errors.email}</MensagemErro>}
+                </section>
+                <ContainerPlantNewsletter>
+                    <img alt="Planta" src={imagePlant}></img>
+                </ContainerPlantNewsletter>
+            </MainContainer>
+            <Offers></Offers>
+        </>
     )
 }
 
-export default AssinaturaNewsletter;
+export default Newsletter;

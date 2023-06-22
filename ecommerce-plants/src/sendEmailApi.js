@@ -7,7 +7,6 @@ const TEMPLATE_ID = "template_5053gew";
 export const sendEmailNewsletter = form => {
     emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form, API_KEY)
       .then((result) => {
-          console.log(result.text);
       }, (error) => {
           console.log(error.text);
       });
