@@ -1,7 +1,9 @@
+import { useState, useEffect } from 'react';
 import arrow from '../assets/arrow.png';
 import plantAjuga from '../assets/plant-ajuga.png';
 import plantCordyline from '../assets/plant-cordyline.png';
 import plantCrassula from '../assets/plant-crassula.png';
+import axios from 'axios';
 
 import styled from 'styled-components';
 
@@ -110,44 +112,47 @@ const CointanerButton = styled.div`
 `;
 
 function Offers() {
+    const [listOffers, setListOffers] = useState([]);
+    const URL_GITHUB = "https://gist.githubusercontent.com/bugan/41d60ffa23fa0c4044cc138bf670780d/raw";
+
+    const getListOffers = () => {
+        axios.get(URL_GITHUB)
+        .then(response => setListOffers(response.data))
+        .catch(error => console.log(error));
+    }
+    
+    useEffect(() => {
+        getListOffers();
+    }, []);
+
     return (
         <MainContainerOffers>
             <SmallTitle>Conheça nossas</SmallTitle>
             <BigTittle>ofertas</BigTittle>
             <ContainerOffers>
-                <SubcontainerOffer>
-                    <img src={plantAjuga} alt="Planta Ajuda Reptans"></img>
-                    <ContainerTextsPlant>
-                        <TitlePlant>Ajuga Reptans</TitlePlant>
-                        <PricePlant>R$ 20,00</PricePlant>
-                        <CointanerButton>
-                            <button>Comprar</button>
-                            <img src={arrow} alt="Seta"></img>
-                        </CointanerButton>
-                    </ContainerTextsPlant>
-                </SubcontainerOffer>
-                <SubcontainerOffer>
-                    <img src={plantCordyline} alt="Planta Cordyline fruticosa"></img>
-                    <ContainerTextsPlant>
-                        <TitlePlant>Cordyline fruticosa</TitlePlant>
-                        <PricePlant>R$ 20,00</PricePlant>
-                        <CointanerButton>
-                            <button>Comprar</button>
-                            <img src={arrow} alt="Seta"></img>
-                        </CointanerButton>
-                    </ContainerTextsPlant>
-                </SubcontainerOffer>
-                <SubcontainerOffer>
-                    <img src={plantCrassula} alt="Planta Crassula ovata"></img>
-                    <ContainerTextsPlant>
-                        <TitlePlant>Crassula ovata</TitlePlant>
-                        <PricePlant>R$ 20,00</PricePlant>
-                        <CointanerButton>
-                            <button>Comprar</button>
-                            <img src={arrow} alt="Seta"></img>
-                        </CointanerButton>
-                    </ContainerTextsPlant>
-                </SubcontainerOffer>
+                {listOffers.length > 0 && listOffers.map(offer => {
+                    let pathPlantImage = "";
+
+                    if (offer.name.includes("Reptans")) {
+                        pathPlantImage = plantAjuga;
+                    } else if (offer.name.includes("Cordyline")) {
+                        pathPlantImage = plantCordyline;
+                    } else if (offer.name.includes("Crassula")) {
+                        pathPlantImage = plantCrassula;
+                    }
+
+                    return (<SubcontainerOffer>
+                        <img src={pathPlantImage} alt={offer.name}></img>
+                        <ContainerTextsPlant>
+                            <TitlePlant>{offer.name}</TitlePlant>
+                            <PricePlant>R$ {offer.price}</PricePlant>
+                            <CointanerButton>
+                                <button>Comprar</button>
+                                <img src={arrow} alt="Seta"></img>
+                            </CointanerButton>
+                        </ContainerTextsPlant>
+                    </SubcontainerOffer>)                 
+                })}
             </ContainerOffers>
         </MainContainerOffers>
     )
