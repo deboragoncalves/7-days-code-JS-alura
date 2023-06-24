@@ -111,6 +111,25 @@ const CointanerButton = styled.div`
     }
 `;
 
+const ContainerFilters = styled.section`
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+
+    button {
+        cursor: pointer;
+        width: 194px;
+        height: 45px;
+        border: none;
+        background: #FFCB47;
+        color: #fff;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 16px;
+        line-height: 20px;
+    }
+`;
+
 function Offers() {
     const [listOffers, setListOffers] = useState([]);
     const URL_GITHUB = "https://gist.githubusercontent.com/bugan/41d60ffa23fa0c4044cc138bf670780d/raw";
@@ -120,17 +139,36 @@ function Offers() {
         .then(response => setListOffers(response.data))
         .catch(error => console.log(error));
     }
-    
+
     useEffect(() => {
         getListOffers();
     }, []);
+
+    const sortListByName = () => {
+        let listOrderName = [...listOffers];
+        listOrderName.sort((a, b) => (a.name > b.name) ? 1 : -1);
+        setListOffers(listOrderName);
+        console.log("Lista nome:");
+        console.log(listOffers);
+    }
+    
+    const sortListByPrice = () => {
+        let listOrderPrice = [...listOffers];
+        listOrderPrice.sort((a, b) => (a.preco > b.preco) ? 1 : -1);
+        setListOffers(listOrderPrice);
+        console.log("Lista preço:");
+        console.log(listOffers);
+    }
 
     return (
         <MainContainerOffers>
             <SmallTitle>Conheça nossas</SmallTitle>
             <BigTittle>ofertas</BigTittle>
             <ContainerOffers>
-                {listOffers.length > 0 && listOffers.map(offer => {
+                {listOffers.length > 0 && listOffers.map((offer, index) => {
+                    // se nao tiver estoque
+                    if (offer.ordem <= 0) return <></>;
+
                     let pathPlantImage = "";
 
                     if (offer.name.includes("Reptans")) {
@@ -141,11 +179,13 @@ function Offers() {
                         pathPlantImage = plantCrassula;
                     }
 
-                    return (<SubcontainerOffer>
+                    let formatPrice = offer.preco.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
+
+                    return (<SubcontainerOffer key={index}>
                         <img src={pathPlantImage} alt={offer.name}></img>
                         <ContainerTextsPlant>
                             <TitlePlant>{offer.name}</TitlePlant>
-                            <PricePlant>R$ {offer.price}</PricePlant>
+                            <PricePlant>{formatPrice}</PricePlant>
                             <CointanerButton>
                                 <button>Comprar</button>
                                 <img src={arrow} alt="Seta"></img>
@@ -154,6 +194,10 @@ function Offers() {
                     </SubcontainerOffer>)                 
                 })}
             </ContainerOffers>
+            <ContainerFilters>
+                <button onClick={sortListByName}>Ordenar por nome</button>
+                <button onClick={sortListByPrice}>Ordenar por preço</button>
+            </ContainerFilters>
         </MainContainerOffers>
     )
 }
