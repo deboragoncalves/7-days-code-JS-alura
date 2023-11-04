@@ -1,9 +1,9 @@
-<div *ngFor="let movie of movies">
+<div *ngFor="let movie of listMovies">
     <div style="padding: 10px; border-bottom: 1px solid black;">
         <p><b>Titulo: </b>{{ movie.title }}</p>
         <p><b>Diretor:</b> {{ movie.director }}</p>
         <p><b>Produtores:</b> {{ movie.producer }}</p>
-        <p><b>Data:</b> {{ movie.date | date: 'dd/MM/yyyy' }}</p>        
+        <p><b>Data:</b> {{ movie.release_date | date: 'dd/MM/yyyy' }}</p>        
     </div>
 </div>
 <router-outlet></router-outlet>
